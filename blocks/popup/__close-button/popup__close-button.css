@@ -1,0 +1,24 @@
+.popup__close-button {
+  background: #000000;
+  border: none;
+  background-image: url(../../../images/popup-close-iqon.svg);
+  padding: 0;
+  background-size: cover;
+  position: absolute;
+  top: -40.7px;
+  right: -40.7px;
+  width: 40.7px;
+  height: 40.7px;
+  cursor: pointer;
+}
+
+.popup__close-button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 540px){
+  .popup__close-button {
+    top: -40.7px;
+    right: 0;
+  }
+}

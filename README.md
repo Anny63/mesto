@@ -1,17 +1,14 @@
-# Проект 4: Место
+# Mesto
 
-### Обзор
+###
 
-* Figma
-* Картинки
+This site allows you to add photos, delete them and put likes. It consists of the following sections:
 
-**Figma**
+1. Your name
+2. Your position
+3. Your photos
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+The following technologies were used to develop the site:
+* Html
+* Css
+* Java Script
