@@ -11,8 +11,10 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
+  border: none;
 }
 
 .popup__save-button:hover {
-  background: rgba(0, 0, 0, 0.8);
+  opacity: 0.8;
+  transition: 0.3s opacity ease-in-out;
 }
