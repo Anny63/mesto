@@ -18,12 +18,12 @@
           <div class="profile__form">
             <div class="profile__row">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button type="button" class="profile__edit-button"></button>
+              <button type="button" aria-label="Редактировать" class="profile__edit-button"></button>
             </div>
             <p class="profile__position">Исследователь океана</p>
           </div>
         </div>
-        <button type="button" class="profile__add-button"></button>
+        <button type="button" aria-label="Добавить" class="profile__add-button"></button>
       </section>
       <section class="elements">
         <ul class="elements__list">
@@ -31,42 +31,42 @@
             <img class="elements__image" src="images/elements-altai.jpg" alt="Алтай">
             <div class="elements__rectangle">
               <h2 class="elements__text">Алтай</h2>
-              <button type="button" class="elements__like"></button>
+              <button type="button" aria-label="Нравится" class="elements__like"></button>
             </div>
           </li>
           <li class="elements__item">
             <img class="elements__image" src="images/elements-baikal.jpg" alt="Байкал">
             <div class="elements__rectangle">
               <h2 class="elements__text">Озеро Байкал</h2>
-              <button type="button" class="elements__like"></button>
+              <button type="button" aria-label="Нравится" class="elements__like"></button>
             </div>
           </li>
           <li class="elements__item">
             <img class="elements__image" src="images/elements-elbrus.jpg" alt="Эльбрус">
             <div class="elements__rectangle">
               <h2 class="elements__text">Гора Эльбрус</h2>
-              <button type="button" class="elements__like"></button>
+              <button type="button" aria-label="Нравится" class="elements__like"></button>
             </div>
           </li>
           <li class="elements__item">
             <img class="elements__image" src="images/elements-stpetersburg.jpg" alt="Санкт-Петербург">
             <div class="elements__rectangle">
               <h2 class="elements__text">Санкт-Петербург</h2>
-              <button type="button" class="elements__like"></button>
+              <button type="button" aria-label="Нравится" class="elements__like"></button>
             </div>
           </li>
           <li class="elements__item">
             <img class="elements__image" src="images/elements-moscow.jpg" alt="Москва">
             <div class="elements__rectangle">
               <h2 class="elements__text">Москва</h2>
-              <button type="button" class="elements__like"></button>
+              <button type="button" aria-label="Нравится" class="elements__like"></button>
             </div>
           </li>
           <li class="elements__item">
             <img class="elements__image" src="images/elements-vladivostok.jpg" alt="Владивосток">
             <div class="elements__rectangle">
               <h2 class="elements__text">Владивосток</h2>
-              <button type="button" class="elements__like"></button>
+              <button type="button" aria-label="Нравится" class="elements__like"></button>
             </div>
           </li>
         </ul>
@@ -79,10 +79,10 @@
 <div class="popup">
   <div class="popup__container">
     <h2 class="popup__title">Редактировать профиль</h2>
-    <button type="button" class="popup__close-button"></button>
+    <button type="button" aria-label="Закрыть" class="popup__close-button"></button>
     <form action="#" class="popup__form" name="profile">
-      <input type="text" class="popup__input popup__input_type_name" name="name" value="Жак-Ив Кусто" required>
-      <input type="text" class="popup__input popup__input_type_position" name="position" value="Исследователь океана" required>
+      <input type="text" class="popup__input popup__input_type_name" name="name" value="" required>
+      <input type="text" class="popup__input popup__input_type_position" name="position" value="" required>
       <button type="submit" class="popup__save-button">Сохранить</button>
     </form>
   </div>
