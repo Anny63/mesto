@@ -9,6 +9,7 @@
   border: none;
   object-fit: contain;
   object-position: center;
+  outline: none;
 }
 
 .elements__like:hover {

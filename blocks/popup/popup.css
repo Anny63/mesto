@@ -4,6 +4,10 @@
 @import url(./__form/popup__form.css);
 @import url(./__save-button/popup__save-button.css);
 @import url(./__input/popup__input.css);
+@import url(./__container/_image/popup__container_image.css);
+@import url(./__image/popup__image.css);
+@import url(./__text/popup__text.css);
+@import url(./__figure/popup__figure.css);
 
 .popup {
   position: fixed;
@@ -12,9 +16,12 @@
   width: 100%;
   height: 100%;
   background: #00000080;
-  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: 'Inter', Arial, sans-serif;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.5s linear;
 }

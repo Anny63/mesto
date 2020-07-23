@@ -4,6 +4,8 @@
 @import url(./__rectangle/elements__rectangle.css);
 @import url(./__text/elements__text.css);
 @import url(./__like/elements__like.css);
+@import url(./__like/_active/elements__like_active.css);
+@import url(./__delete/elements__delete.css);
 
 .elements {
   font-family: 'Inter', Arial, sans-serif;
