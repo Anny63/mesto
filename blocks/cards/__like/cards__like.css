@@ -1,4 +1,4 @@
-.elements__like {
+.cards__like {
   width: 21px;
   height: 18px;
   margin-right: 15px;
@@ -12,7 +12,7 @@
   outline: none;
 }
 
-.elements__like:hover {
+.cards__like:hover {
   opacity: 0.6;
   transition: 0.3s opacity ease-in-out;
 }

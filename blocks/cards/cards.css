@@ -1,0 +1,11 @@
+@import url(./__image/cards__image.css);
+@import url(./__delete/cards__delete.css);
+@import url(./__rectangle/cards__rectangle.css);
+@import url(./__text/cards__text.css);
+@import url(./__like/cards__like.css);
+@import url(./__like/_active/cards__like_active.css);
+
+.cards {
+  max-width: 100%;
+  position: relative;
+}

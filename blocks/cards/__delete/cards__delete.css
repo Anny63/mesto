@@ -1,4 +1,4 @@
-.elements__delete {
+.cards__delete {
   background: rgba(0, 0, 0, 0);
   border: none;
   background-image: url(../../../images/elements-delete.svg);
@@ -13,7 +13,7 @@
   outline: none;
 }
 
-.elements__delete:hover {
+.cards__delete:hover {
   opacity: 0.6;
   transition: 0.3s opacity ease-in-out;
 }
