@@ -103,6 +103,7 @@ editPopupButton.addEventListener('click', openPopUpEdit);
 closeEditPopupButton.addEventListener('click', closePopUpEdit);
 addPopupButton.addEventListener('click', openPopUpAdd);
 closeAddPopupButton.addEventListener('click', closePopUpAdd);
+document.addEventListener('keydown', closePopUpEsc);
 
 // добавление карточек
 function createCard(data) {
@@ -125,9 +126,14 @@ function createCard(data) {
     hadleDeleteClick(cardDeleteButtom);
   });
   closeImagePopupButton.addEventListener('click', closePopUpImage);
+
   cardImage.addEventListener('click', () => {
     hadleImageClick(data.name, data.link);
   });
+
+  cardImage.addEventListener('keydown', createCardEnter);
+
+  popupImage.addEventListener('click', closePopUpImage);
 
   return cardElement;
 }
@@ -162,3 +168,32 @@ function hadleDeleteClick(deleteButtomClick) {
 function closePopUpImage() {
   popupImage.classList.remove('popup_opened');
 }
+
+// закрытие попапов по нажатию Esc
+function closePopUpEsc(evt) {
+  if (evt.key === 'Escape') {
+    closePopUpImage(evt.target);
+    closePopUpEdit(evt.target);
+    closePopUpAdd(evt.target);
+  }
+}
+
+// добавление карточек по нажатию Enter
+function createCardEnter(evt) {
+  if (evt.key === 'Enter') {
+    hadleImageClick(evt.target);
+  }
+}
+
+// закрытие папапов через клик
+function closeOpenPopupOverlay() {
+  const popupForm = Array.from(document.querySelectorAll('.popup__container'));
+  popupForm.forEach(function () {
+    document.addEventListener('click', (evt) => {
+      if(evt.target.classList.contains('popup_opened')) {
+        evt.target.classList.remove('popup_opened');
+      }
+    });
+  });
+}
+closeOpenPopupOverlay();
