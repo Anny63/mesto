@@ -2,10 +2,10 @@
 const object = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
-  inputErrorClass: '.popup__input_invalid',
+  inputErrorClass: 'popup__input_invalid',
   submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: '.popup__save-button_disabled',
-  errorClass: '.popup__error_visible',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  errorClass: 'popup__error_visible'
 }
 
 // функция, которая добавляет обработчики всем формам
@@ -37,10 +37,10 @@ const setEventListeners = (formElement, { inputSelector, submitButtonSelector, .
 // функция, которая изменяет состояние кнопки
 const toggleButtonState = (inputList, buttonElement, { inactiveButtonClass, ...rest }) => {
   if (hasInvalidInput(inputList, rest)) {
-    buttonElement.classList.add('popup__save-button_disabled');
+    buttonElement.classList.add(inactiveButtonClass);
     buttonElement.disabled = true;
   } else {
-    buttonElement.classList.remove('popup__save-button_disabled');
+    buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.disabled = false;
   }
 }
@@ -49,7 +49,7 @@ const toggleButtonState = (inputList, buttonElement, { inactiveButtonClass, ...r
 const hasInvalidInput = (inputList, { inputErrorClass, errorClass }) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
-  })
+  });
 }
 
 // функция, которая добавляет класс с ошибкой
@@ -80,8 +80,8 @@ const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) 
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
-  inputErrorClass: '.popup__input_invalid',
+  inputErrorClass: 'popup__input_invalid',
   submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: '.popup__save-button_disabled',
-  errorClass: '.popup__error_visible'
+  inactiveButtonClass: 'popup__save-button_disabled',
+  errorClass: 'popup__error_visible'
 });

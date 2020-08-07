@@ -27,43 +27,17 @@ const jobInput = popupEdit.querySelector('.popup__input_type_position');
 const placeInput = popupAdd.querySelector('.popup__input_type_place');
 const linkInput = popupAdd.querySelector('.popup__input_type_link');
 
-// массив карточек
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // открытие и закрытие попапа профайла
 function openPopUpEdit() {
   popupEdit.classList.add('popup_opened');
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
+  document.addEventListener('keydown', closePopUpEsc);
 }
 
 function closePopUpEdit() {
   popupEdit.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopUpEsc);
 }
 
 // кнопка "сохранить"
@@ -81,10 +55,14 @@ formElementEdit.addEventListener('submit', formEditSubmitHandler);
 // открытие и закрытие попапа добавления фото
 function openPopUpAdd() {
   popupAdd.classList.add('popup_opened');
+  placeInput.value = "";
+  linkInput.value = "";
+  document.addEventListener('keydown', closePopUpEsc);
 }
 
 function closePopUpAdd() {
   popupAdd.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopUpEsc);
 }
 
 // кнопка "создать"
@@ -103,7 +81,6 @@ editPopupButton.addEventListener('click', openPopUpEdit);
 closeEditPopupButton.addEventListener('click', closePopUpEdit);
 addPopupButton.addEventListener('click', openPopUpAdd);
 closeAddPopupButton.addEventListener('click', closePopUpAdd);
-document.addEventListener('keydown', closePopUpEsc);
 
 // добавление карточек
 function createCard(data) {
@@ -142,10 +119,6 @@ function renderCard(data) {
   list.prepend(createCard(data));
 }
 
-initialCards.forEach((data) => {
-  renderCard(data);
-});
-
 //лайк на карточку
 function hadleLikeClick(likeButtomClick) {
   likeButtomClick.classList.toggle('cards__like_active');
@@ -158,15 +131,17 @@ function hadleDeleteClick(deleteButtomClick) {
 }
 
  // открытие и закрытие попапа с картинкой
- function hadleImageClick(name, link) {
+function hadleImageClick(name, link) {
   popupImage.classList.add('popup_opened');
   titleImage.textContent = name;
   pictureImage.src = link;
   pictureImage.alt = name;
+  document.addEventListener('keydown', closePopUpEsc);
 }
 
 function closePopUpImage() {
   popupImage.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopUpEsc);
 }
 
 // закрытие попапов по нажатию Esc
