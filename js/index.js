@@ -12,6 +12,8 @@ const closeEditPopupButton = popupEdit.querySelector('.popup__close-button');
 const addPopupButton = document.querySelector('.profile__add-button');
 const closeAddPopupButton = popupAdd.querySelector('.popup__close-button');
 const closeImagePopupButton = popupImage.querySelector('.popup__close-button');
+const buttonElement = popupAdd.querySelector('.popup__save-button');
+//const inactiveButtonClass = popupAdd.querySelector('popup__save-button_disabled');
 
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__position');
@@ -57,6 +59,7 @@ function openPopUpAdd() {
   popupAdd.classList.add('popup_opened');
   placeInput.value = "";
   linkInput.value = "";
+  disableButton(buttonElement, 'popup__save-button_disabled');
   document.addEventListener('keydown', closePopUpEsc);
 }
 

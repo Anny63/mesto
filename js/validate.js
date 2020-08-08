@@ -37,8 +37,7 @@ const setEventListeners = (formElement, { inputSelector, submitButtonSelector, .
 // функция, которая изменяет состояние кнопки
 const toggleButtonState = (inputList, buttonElement, { inactiveButtonClass, ...rest }) => {
   if (hasInvalidInput(inputList, rest)) {
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.disabled = true;
+    disableButton(buttonElement, inactiveButtonClass);
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.disabled = false;
@@ -77,11 +76,4 @@ const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) 
   }
 }
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  inputErrorClass: 'popup__input_invalid',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  errorClass: 'popup__error_visible'
-});
+enableValidation(object);
