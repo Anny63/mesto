@@ -1,12 +1,4 @@
-// массив объектов валидации
-const object = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  inputErrorClass: 'popup__input_invalid',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  errorClass: 'popup__error_visible'
-}
+import {disableButton} from './utils.js';
 
 // валидация полей формы
 export default class FormValidator {
@@ -17,6 +9,7 @@ export default class FormValidator {
     this._submitButtonSelector = formElements.submitButtonSelector;
     this._inactiveButtonClass = formElements.inactiveButtonClass;
     this._errorClass = formElements.errorClass;
+    this._disableButton = disableButton;
   }
 
   // функция, которая добавляет обработчики всем формам
@@ -43,12 +36,6 @@ export default class FormValidator {
         this._toggleButtonState(inputList, buttonElement);
       });
     });
-  }
-
-  // функция, которая блокирует кнопку
-  _disableButton(buttonElement) {
-    buttonElement.classList.add(this._inactiveButtonClass);
-    buttonElement.disabled = true;
   }
 
   // функция, которая изменяет состояние кнопки
@@ -93,6 +80,3 @@ export default class FormValidator {
     }
   }
 }
-
-const validate = new FormValidator(object);
-validate.enableValidation();

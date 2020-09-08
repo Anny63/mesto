@@ -2,22 +2,27 @@ const popupImage = document.querySelector('.popup_type_image');
 const closeImagePopupButton = popupImage.querySelector('.popup__close-button');
 const titleImage = document.querySelector('.popup__text');
 const pictureImage = document.querySelector('.popup__image');
+import {openPopupImg} from './index.js';
 
 // создание карточки
 export default class Card {
-  constructor (data, cardElement) {
+  constructor (data, cardSelector) {
     this._text = data.name;
     this._image = data.link;
-    this._cardElement = cardElement;
+    this._cardSelector = cardSelector;
     this._closePopUpEsc = () => {
-      this._hadleImageClick ();
+      this._handleImageClick ();
       this._closePopUpImage ();
+    }
+    this._openPopupImg = () => {
+      openPopupImg ();
+      this._handleImageClick ();
     }
   }
 
   _getTemplate() {
     const cardElement = document
-      .querySelector('.template-card')
+      .querySelector(this._cardSelector)
       .content
       .querySelector('.cards')
       .cloneNode(true);
@@ -26,52 +31,51 @@ export default class Card {
 
   renderCard() {
     this._card = this._getTemplate();
+    const cardImage = this._card.querySelector('.cards__image');
+    const cardText = this._card.querySelector('.cards__text');
     this._setEventListener()
-    this._card.querySelector('.cards__image').src = this._image;
-    this._card.querySelector('.cards__image').alt = this._text;
-    this._card.querySelector('.cards__text').textContent = this._text;
+    this._like()
+    this._delete()
+    cardImage.src = this._image;
+    cardImage.alt = this._text;
+    cardText.textContent = this._text;
     return this._card;
   }
 
-  // открытие и закрытие попапа с картинкой
-  _hadleImageClick() {
+  // клик на попап с картинкой
+  _handleImageClick() {
     pictureImage.src = this._image;
     pictureImage.alt = this._text;
     titleImage.textContent = this._text;
-    popupImage.classList.add('popup_opened');
     document.addEventListener('keydown', this._closePopUpEsc);
   }
 
+  // закрытие попапа с картинкой
   _closePopUpImage() {
     popupImage.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._closePopUpEsc);
   }
 
-  // добавление карточки по нажатию Enter
-  _createCardEnter(evt) {
-    if (evt.key === 'Enter') {
-      hadleImageClick(evt.target);
-    }
-  }
-
   _setEventListener() {
     this._card.querySelector('.cards__image').addEventListener('click', () => {
-      this._hadleImageClick();
+      this._openPopupImg ();
     });
-    closeImagePopupButton.addEventListener('click', () => {
-      this._closePopUpImage()
-    });
-    popupImage.addEventListener('click', () => {
-      this._closePopUpImage()
-    });
+    closeImagePopupButton.addEventListener('click', this._closePopUpImage);
+    popupImage.addEventListener('click', this._closePopUpImage);
+  }
 
-    //лайк на карточку
-    this._card.querySelector('.cards__like').addEventListener('click', (evt) => {
+  //лайк на карточку
+  _like() {
+    const cardLikeButtom = this._card.querySelector('.cards__like');
+    cardLikeButtom.addEventListener('click', (evt) => {
       evt.target.classList.toggle('cards__like_active');
     });
+  }
 
-    // удаление карточки
-    this._card.querySelector('.cards__delete').addEventListener('click', (evt) => {
+  // удаление карточки
+  _delete() {
+    const cardDeleteButtom = this._card.querySelector('.cards__delete');
+    cardDeleteButtom.addEventListener('click', (evt) => {
       evt.target.closest('.cards').remove();
     });
   }

@@ -1,5 +1,6 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
+import { disableButton } from './utils.js';
 
 // массив карточек
 const initialCards = [
@@ -30,8 +31,10 @@ const initialCards = [
 ];
 
 // обёртки
+const popupWindow = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup_type_edit-profile');
 const popupAdd = document.querySelector('.popup_type_add-card');
+const popupImage = document.querySelector('.popup_type_image');
 
 const formElementEdit = popupEdit.querySelector('.popup__form');
 const formElementAdd = popupAdd.querySelector('.popup__form');
@@ -41,6 +44,7 @@ const editPopupButton = document.querySelector('.profile__edit-button');
 const closeEditPopupButton = popupEdit.querySelector('.popup__close-button');
 const addPopupButton = document.querySelector('.profile__add-button');
 const closeAddPopupButton = popupAdd.querySelector('.popup__close-button');
+const buttonElement = popupAdd.querySelector('.popup__save-button');
 
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__position');
@@ -52,7 +56,17 @@ const jobInput = popupEdit.querySelector('.popup__input_type_position');
 const placeInput = popupAdd.querySelector('.popup__input_type_place');
 const linkInput = popupAdd.querySelector('.popup__input_type_link');
 
-// открытие и закрытие попапа профайла
+// массив объектов валидации
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  inputErrorClass: 'popup__input_invalid',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  errorClass: 'popup__error_visible'
+}
+
+// открытие попапа профайла
 function openPopUpEdit() {
   popupEdit.classList.add('popup_opened');
   nameInput.value = nameProfile.textContent;
@@ -60,8 +74,25 @@ function openPopUpEdit() {
   document.addEventListener('keydown', closePopUpEsc);
 }
 
-function closePopUpEdit() {
-  popupEdit.classList.remove('popup_opened');
+// открытие попапа добавления фото
+function openPopUpAdd() {
+  popupAdd.classList.add('popup_opened');
+  placeInput.value = "";
+  linkInput.value = "";
+  disableButton(buttonElement, 'popup__save-button_disabled');
+  document.addEventListener('keydown', closePopUpEsc);
+}
+
+// открытие попапа с картинкой
+export function openPopupImg() {
+  popupImage.classList.add('popup_opened');
+}
+
+// закрытие попапов
+function closePopUpWindow() {
+  popupWindow.classList.remove('popup_opened');
+  popupAdd.classList.remove('popup_opened');
+  popupImage.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopUpEsc);
 }
 
@@ -72,20 +103,7 @@ function formEditSubmitHandler(evt) {
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
 
-  closePopUpEdit(popupEdit);
-}
-
-// открытие и закрытие попапа добавления фото
-function openPopUpAdd() {
-  popupAdd.classList.add('popup_opened');
-  placeInput.value = "";
-  linkInput.value = "";
-  document.addEventListener('keydown', closePopUpEsc);
-}
-
-function closePopUpAdd() {
-  popupAdd.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopUpEsc);
+  closePopUpWindow(popupEdit);
 }
 
 // кнопка "создать"
@@ -94,22 +112,22 @@ function formAddSubmitHandler(evt) {
 
   renderCard({ name: placeInput.value, link: linkInput.value });
 
-  closePopUpAdd(popupAdd);
+  closePopUpWindow(popupAdd);
 }
 
 // слушатели событий
 editPopupButton.addEventListener('click', openPopUpEdit);
-closeEditPopupButton.addEventListener('click', closePopUpEdit);
 addPopupButton.addEventListener('click', openPopUpAdd);
-closeAddPopupButton.addEventListener('click', closePopUpAdd);
+closeEditPopupButton.addEventListener('click', closePopUpWindow);
+closeAddPopupButton.addEventListener('click', closePopUpWindow);
 formElementEdit.addEventListener('submit', formEditSubmitHandler);
 formElementAdd.addEventListener('submit', formAddSubmitHandler);
 
 // закрытие попапов по нажатию Esc
 function closePopUpEsc(evt) {
+  const activePopUp = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    closePopUpEdit(evt.target);
-    closePopUpAdd(evt.target);
+    closePopUpWindow(activePopUp);
   }
 }
 
@@ -129,7 +147,7 @@ closeOpenPopupOverlay();
 // добавление карточек
 function createCard(item) {
 
-  const card = new Card(item, '.tepmlate-card');
+  const card = new Card(item, '#tepmlate-card');
   return card.renderCard(item);
 }
 
@@ -141,3 +159,8 @@ initialCards.forEach(function (item) {
   const cardElement = createCard(item);
   list.append(cardElement);
 })
+
+const validateAdd = new FormValidator(validationConfig);
+validateAdd.enableValidation();
+const validateEdit = new FormValidator(validationConfig);
+validateEdit.enableValidation();
