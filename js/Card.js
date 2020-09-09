@@ -1,8 +1,7 @@
 const popupImage = document.querySelector('.popup_type_image');
-const closeImagePopupButton = popupImage.querySelector('.popup__close-button');
 const titleImage = document.querySelector('.popup__text');
 const pictureImage = document.querySelector('.popup__image');
-import {openPopupImg} from './index.js';
+import {openPopUpWindow} from './index.js';
 
 // создание карточки
 export default class Card {
@@ -14,8 +13,8 @@ export default class Card {
       this._handleImageClick ();
       this._closePopUpImage ();
     }
-    this._openPopupImg = () => {
-      openPopupImg ();
+    this._openPopUpWindow = () => {
+      openPopUpWindow (popupImage);
       this._handleImageClick ();
     }
   }
@@ -48,20 +47,19 @@ export default class Card {
     pictureImage.alt = this._text;
     titleImage.textContent = this._text;
     document.addEventListener('keydown', this._closePopUpEsc);
+    popupImage.addEventListener('click', this._closePopUpImage);
   }
 
   // закрытие попапа с картинкой
   _closePopUpImage() {
-    popupImage.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._closePopUpEsc);
+    popupImage.removeEventListener('click', this._closePopUpImage);
   }
 
   _setEventListener() {
     this._card.querySelector('.cards__image').addEventListener('click', () => {
-      this._openPopupImg ();
+      this._openPopUpWindow();
     });
-    closeImagePopupButton.addEventListener('click', this._closePopUpImage);
-    popupImage.addEventListener('click', this._closePopUpImage);
   }
 
   //лайк на карточку

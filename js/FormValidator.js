@@ -1,5 +1,3 @@
-import {disableButton} from './utils.js';
-
 // валидация полей формы
 export default class FormValidator {
   constructor(formElements) {
@@ -38,10 +36,11 @@ export default class FormValidator {
     });
   }
 
+
   // функция, которая изменяет состояние кнопки
   _toggleButtonState(inputList, buttonElement) {
     if (this._hasInvalidInput(inputList)) {
-      this._disableButton(buttonElement, this._inactiveButtonClass);
+      this._disableButton(buttonElement);
     } else {
       buttonElement.classList.remove(this._inactiveButtonClass);
       buttonElement.disabled = false;
@@ -79,4 +78,9 @@ export default class FormValidator {
       this._hideInputError(formElement, inputElement);
     }
   }
+}
+
+export function disableButton(buttonElement) {
+  buttonElement.classList.add('popup__save-button_disabled');
+  buttonElement.disabled = true;
 }

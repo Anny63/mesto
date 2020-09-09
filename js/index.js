@@ -1,6 +1,6 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-import { disableButton } from './utils.js';
+import {disableButton} from './FormValidator.js';
 
 // массив карточек
 const initialCards = [
@@ -45,6 +45,7 @@ const closeEditPopupButton = popupEdit.querySelector('.popup__close-button');
 const addPopupButton = document.querySelector('.profile__add-button');
 const closeAddPopupButton = popupAdd.querySelector('.popup__close-button');
 const buttonElement = popupAdd.querySelector('.popup__save-button');
+const closeImagePopupButton = popupImage.querySelector('.popup__close-button');
 
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__position');
@@ -66,33 +67,20 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 }
 
-// открытие попапа профайла
-function openPopUpEdit() {
-  popupEdit.classList.add('popup_opened');
+// открытие попапов
+export function openPopUpWindow(popupWindow) {
+  popupWindow.classList.add('popup_opened');
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
-  document.addEventListener('keydown', closePopUpEsc);
-}
-
-// открытие попапа добавления фото
-function openPopUpAdd() {
-  popupAdd.classList.add('popup_opened');
   placeInput.value = "";
   linkInput.value = "";
-  disableButton(buttonElement, 'popup__save-button_disabled');
   document.addEventListener('keydown', closePopUpEsc);
-}
-
-// открытие попапа с картинкой
-export function openPopupImg() {
-  popupImage.classList.add('popup_opened');
+  disableButton(buttonElement, 'popup__save-button_disabled');
 }
 
 // закрытие попапов
-function closePopUpWindow() {
+function closePopUpWindow(popupWindow) {
   popupWindow.classList.remove('popup_opened');
-  popupAdd.classList.remove('popup_opened');
-  popupImage.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopUpEsc);
 }
 
@@ -116,10 +104,21 @@ function formAddSubmitHandler(evt) {
 }
 
 // слушатели событий
-editPopupButton.addEventListener('click', openPopUpEdit);
-addPopupButton.addEventListener('click', openPopUpAdd);
-closeEditPopupButton.addEventListener('click', closePopUpWindow);
-closeAddPopupButton.addEventListener('click', closePopUpWindow);
+editPopupButton.addEventListener('click', () => {
+  openPopUpWindow(popupEdit);
+});
+addPopupButton.addEventListener('click', () => {
+  openPopUpWindow(popupAdd);
+});
+closeEditPopupButton.addEventListener('click', () => {
+  closePopUpWindow(popupEdit);
+});
+closeAddPopupButton.addEventListener('click', () => {
+  closePopUpWindow(popupAdd);
+});
+closeImagePopupButton.addEventListener('click', () => {
+  closePopUpWindow(popupImage);
+});
 formElementEdit.addEventListener('submit', formEditSubmitHandler);
 formElementAdd.addEventListener('submit', formAddSubmitHandler);
 
@@ -134,10 +133,10 @@ function closePopUpEsc(evt) {
 // закрытие папапов через клик
 function closeOpenPopupOverlay() {
   const popupForm = Array.from(document.querySelectorAll('.popup__container'));
-  popupForm.forEach(function () {
+  popupForm.forEach(function (evt) {
     document.addEventListener('click', (evt) => {
       if(evt.target.classList.contains('popup_opened')) {
-        evt.target.classList.remove('popup_opened');
+        closePopUpWindow(evt.target);
       }
     });
   });
