@@ -1,6 +1,5 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-import {disableButton} from './FormValidator.js';
 
 // массив карточек
 const initialCards = [
@@ -70,12 +69,23 @@ const validationConfig = {
 // открытие попапов
 export function openPopUpWindow(popupWindow) {
   popupWindow.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopUpEsc);
+}
+
+// открытие модального окна редактирования профиля
+function openModalEdit(popupEdit) {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
+  validateEdit.disableButton(buttonElement);
+  openPopUpWindow(popupEdit);
+}
+
+// открытие модального окна добавления карточки
+function openModalAdd(popupAdd) {
   placeInput.value = "";
   linkInput.value = "";
-  document.addEventListener('keydown', closePopUpEsc);
-  disableButton(buttonElement, 'popup__save-button_disabled');
+  validateAdd.disableButton(buttonElement);
+  openPopUpWindow(popupAdd);
 }
 
 // закрытие попапов
@@ -105,10 +115,10 @@ function formAddSubmitHandler(evt) {
 
 // слушатели событий
 editPopupButton.addEventListener('click', () => {
-  openPopUpWindow(popupEdit);
+  openModalEdit(popupEdit);
 });
 addPopupButton.addEventListener('click', () => {
-  openPopUpWindow(popupAdd);
+  openModalAdd(popupAdd);
 });
 closeEditPopupButton.addEventListener('click', () => {
   closePopUpWindow(popupEdit);
